@@ -5,7 +5,7 @@ import { getProfileController,updateProfileController } from '../controllers/use
 
 const router = express.Router();
 
-router.get('/', supabaseAuth, getProfileController);
-router.patch('/', supabaseAuth, updateProfileController);
+router.get('/profile', supabaseAuth, getProfileController);
+router.patch('/profile', supabaseAuth, updateProfileController);
 
 export default router;

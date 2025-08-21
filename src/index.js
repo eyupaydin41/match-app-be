@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import userRouter from './modules/users/routes/userRoutes.js';
 import authRouter from './modules/auth/routes/authRoutes.js';
 import photoRouter from './modules/users/routes/photoRoutes.js';
+import interactionRouter from './modules/interactions/routes/interactionRoutes.js';
 
 dotenv.config();
 
@@ -22,3 +23,4 @@ app.listen(PORT, () => {
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/photo', photoRouter);    
+app.use('/interaction', interactionRouter);

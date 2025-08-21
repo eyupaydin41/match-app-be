@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import Like from '../models/Like.js';
 import Match from '../models/Match.js';
 import User from '../../users/models/User.js';
+import Conversation from '../../chat/models/Conversation.js';
 
 export const likeUser = async (fromUserId, toUserId) => {
   if (fromUserId === toUserId) throw new Error("Kendini like edemezsin");
@@ -13,7 +14,8 @@ export const likeUser = async (fromUserId, toUserId) => {
 
   const reverseLike = await Like.findOne({ where: { fromUserId: toUserId, toUserId: fromUserId } });
   if (reverseLike) {
-    await Match.create({ userAId: fromUserId, userBId: toUserId });
+    const match = await Match.create({ userAId: fromUserId, userBId: toUserId });
+    await Conversation.create({ matchId: match.id })
   }
 
   return like;

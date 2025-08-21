@@ -13,6 +13,7 @@ export const addPhoto = async (userId, file) => {
 
   const photo = await UserPhoto.create({
     url: result.secure_url,
+    public_id: result.public_id,
     isProfile: false,
     userId
   });
@@ -21,6 +22,7 @@ export const addPhoto = async (userId, file) => {
 
   return photo;
 };
+
 
 export const setProfilePhoto = async (userId, photoId) => {
   await UserPhoto.update({ isProfile: false }, { where: { userId } });
@@ -39,12 +41,15 @@ export const deletePhoto = async (userId, photoId) => {
   const photo = await UserPhoto.findOne({ where: { id: photoId, userId } });
   if (!photo) throw new Error('Fotoğraf bulunamadı');
 
-try {
-    await cloudinary.uploader.destroy(photo.public_id);
+  try {
+    if (photo.public_id) {
+      await cloudinary.uploader.destroy(photo.public_id);
+    }
     await photo.destroy();
-} catch (error) {
+  } catch (error) {
+    console.error('Error deleting photo from cloud:', error);
     throw new Error('Fotoğraf silinirken hata oluştu');
-}   
+  }
 
   return true;
 };

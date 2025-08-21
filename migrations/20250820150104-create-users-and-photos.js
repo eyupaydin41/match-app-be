@@ -74,6 +74,10 @@ export default {
         },
         onDelete: 'CASCADE',
       },
+      public_id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

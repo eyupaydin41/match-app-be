@@ -17,10 +17,4 @@ const Match = sequelize.define('Match', {
   createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW }
 }, { tableName: 'matches', updatedAt: false });
 
-User.hasMany(Match, { as: 'matchesA', foreignKey: 'userAId' });
-User.hasMany(Match, { as: 'matchesB', foreignKey: 'userBId' });
-
-Match.belongsTo(User, { as: 'userA', foreignKey: 'userAId' });
-Match.belongsTo(User, { as: 'userB', foreignKey: 'userBId' });
-
 export default Match;

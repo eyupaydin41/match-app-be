@@ -17,7 +17,4 @@ const Like = sequelize.define('Like', {
   createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW }
 }, { tableName: 'likes', updatedAt: false });
 
-User.hasMany(Like, { as: 'likesGiven', foreignKey: 'fromUserId' });
-User.hasMany(Like, { as: 'likesReceived', foreignKey: 'toUserId' });
-
 export default Like;

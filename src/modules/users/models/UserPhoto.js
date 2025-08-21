@@ -9,7 +9,4 @@ const UserPhoto = sequelize.define('UserPhoto', {
   isProfile: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, { tableName: 'user_photos' });
 
-User.hasMany(UserPhoto, { as: 'photos', foreignKey: 'userId' });
-UserPhoto.belongsTo(User, { foreignKey: 'userId' });
-
 export default UserPhoto;
